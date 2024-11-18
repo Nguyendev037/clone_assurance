@@ -1,6 +1,7 @@
 package com.example.Durian_Assurance.models;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
