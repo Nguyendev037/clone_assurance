@@ -7,11 +7,11 @@ import org.hibernate.annotations.GeneratorType;
 
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(name="cases")
-
 public class Case extends BaseEntity{
 
     @Id
