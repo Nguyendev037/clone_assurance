@@ -1,4 +1,4 @@
-﻿package com.example.Durian_Assurance.models;
+package com.example.Durian_Assurance.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

@@ -1,4 +1,4 @@
-﻿package com.example.Durian_Assurance.iservices;
+package com.example.Durian_Assurance.iservices;
 
 public interface IUserService {
 }
