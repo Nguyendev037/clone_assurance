@@ -1,17 +1,17 @@
 package com.example.durian_assurance.iservices;
 
-import com.example.durian_assurance.dto.requests.CreatePersonRequest;
-import com.example.durian_assurance.dto.requests.UpdatePersonRequest;
-import com.example.durian_assurance.dto.responses.PersonResponse;
+import com.example.durian_assurance.dto.requests.CreateUserRequest;
+import com.example.durian_assurance.dto.requests.UpdateUserRequest;
+import com.example.durian_assurance.dto.responses.UserResponse;
 
 import java.util.List;
 
 public interface IPersonService {
-    public PersonResponse createPerson(CreatePersonRequest request);
+    public UserResponse createPerson(CreateUserRequest request);
 
-    public PersonResponse getPerson(Long id);
+    public UserResponse getPerson(Long id);
 
-    public List<PersonResponse> getAllPeople();
+    public List<UserResponse> getAllPeople();
 
-    public PersonResponse updatePerson(Long id,UpdatePersonRequest request);
+    public UserResponse updatePerson(Long id, UpdateUserRequest request);
 }
