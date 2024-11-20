@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,9 @@ public class SignedOfferService {
                 .offer(offer)
                 .startDate(startDate)
                 .endDate(startDate.plusYears(offer.getYears()))
+                .isActive(true)
+                .payments(new HashSet<>())
+                .payouts(new HashSet<>())
                 .build();
     }
 }
