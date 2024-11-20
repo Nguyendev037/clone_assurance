@@ -16,8 +16,8 @@ public class PayoutController {
     private final PayoutService payoutService;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public String makePayment(@RequestBody PayoutRequest request){
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public String makePayout(@RequestBody PayoutRequest request){
         payoutService.makePayout(request);
         return "Successful payout";
     }

@@ -27,7 +27,7 @@ public class PaymentService {
                 .amount(request.getAmount())
                 .paymentDate(LocalDate.now())
                 .description(request.getDescription())
-//                .signedOffer(signedOfferService.findById())
+                .signedOffer(signedOfferService.getById(request.getSignedOfferId()))
                 .transferer(userService.findById(request.getTransfererId()))
                 .build();
         paymentRepository.save(payment);

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PaymentRequest {
-    Long signedOfferId;
+    String signedOfferId;
     BigDecimal amount;
     String description;
     Long transfererId;

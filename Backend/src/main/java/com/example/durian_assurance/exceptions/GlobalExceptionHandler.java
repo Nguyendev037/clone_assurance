@@ -19,9 +19,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         List<String> errors = new ArrayList<>();
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            errors.add(error.getDefaultMessage());
-        });
+        ex.getBindingResult().getAllErrors().forEach(error -> errors.add(error.getDefaultMessage()));
 
         return ResponseEntity.badRequest().body(errors);
     }
