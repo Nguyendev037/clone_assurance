@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -38,6 +39,10 @@ public class Claim {
     LocalDate admissionDate;
 
     LocalDate dischargeDate;
+
+    String diagnosis;
+
+    BigDecimal payoutAmount;
 
     @Enumerated(EnumType.STRING)
     Status status;

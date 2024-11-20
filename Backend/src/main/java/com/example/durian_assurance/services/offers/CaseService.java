@@ -1,5 +1,7 @@
-package com.example.Durian_Assurance.services.offers;
+package com.example.durian_assurance.services.offers;
 
+import com.example.durian_assurance.dto.requests.CreateCaseRequest;
+import com.example.durian_assurance.models.offers.Case;
 import com.example.durian_assurance.repositories.offers.CaseRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -11,4 +13,11 @@ import org.springframework.stereotype.Service;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CaseService {
     CaseRepository caseRepository;
+
+    public Case createCase(CreateCaseRequest request) {
+        return caseRepository.save(Case.builder()
+                .name(request.getName())
+                .description(request.getDescription())
+                .build());
+    }
 }

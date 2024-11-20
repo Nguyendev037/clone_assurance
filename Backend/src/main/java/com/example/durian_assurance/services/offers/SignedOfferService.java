@@ -1,4 +1,4 @@
-package com.example.Durian_Assurance.services.offers;
+package com.example.durian_assurance.services.offers;
 
 import com.example.durian_assurance.dto.requests.SignedOfferRequest;
 import com.example.durian_assurance.models.offers.Offer;
@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,9 @@ public class SignedOfferService {
                 .offer(offer)
                 .startDate(startDate)
                 .endDate(startDate.plusYears(offer.getYears()))
+                .isActive(true)
+                .payments(new HashSet<>())
+                .payouts(new HashSet<>())
                 .build();
     }
 }
