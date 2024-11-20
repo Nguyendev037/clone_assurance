@@ -1,4 +1,4 @@
-package com.example.Durian_Assurance.services.offers;
+package com.example.durian_assurance.services.offers;
 
 import com.example.durian_assurance.dto.requests.CreateOfferRequest;
 import com.example.durian_assurance.exceptions.NotFoundException;
@@ -9,14 +9,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class OfferService implements IOfferService {
-
     private final OfferRepository offerRepository;
+    private final com.example.Durian_Assurance.services.offers.CaseService caseService;
 
-    @Override
     public Offer createOffer(CreateOfferRequest offerDTO) {
         Offer newOffer = Offer
                 .builder()

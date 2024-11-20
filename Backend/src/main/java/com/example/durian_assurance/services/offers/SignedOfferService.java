@@ -1,4 +1,4 @@
-package com.example.Durian_Assurance.services.offers;
+package com.example.durian_assurance.services.offers;
 
 import com.example.durian_assurance.dto.requests.SignedOfferRequest;
 import com.example.durian_assurance.models.offers.Offer;
@@ -16,7 +16,7 @@ import java.util.HashSet;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SignedOfferService {
-    OfferService offerService;
+    com.example.Durian_Assurance.services.offers.OfferService offerService;
     ClientService clientService;
 
     public SignedOffer createSignedOffer(SignedOfferRequest request){
