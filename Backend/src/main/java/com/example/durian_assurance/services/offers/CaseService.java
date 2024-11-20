@@ -1,6 +1,7 @@
 package com.example.durian_assurance.services.offers;
 
 import com.example.durian_assurance.dto.requests.CreateCaseRequest;
+import com.example.durian_assurance.exceptions.NotFoundException;
 import com.example.durian_assurance.models.offers.Case;
 import com.example.durian_assurance.repositories.offers.CaseRepository;
 import lombok.AccessLevel;
@@ -19,5 +20,9 @@ public class CaseService {
                 .name(request.getName())
                 .description(request.getDescription())
                 .build());
+    }
+
+    public Case getById(Long id){
+        return caseRepository.findById(id).orElseThrow(()->new NotFoundException("Can not find case with id: " + id));
     }
 }

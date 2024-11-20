@@ -24,7 +24,7 @@ public class CreateOfferRequest {
 
     private int years;
 
-    private List<Integer> cases;
+    private List<CreateCasesInOffersRequest> cases;
 
     @Min(value=0, message="Price must be greater than or equal 0")
     @Max(value=100000000, message="Price must be less than or equal to 100,000,000")
