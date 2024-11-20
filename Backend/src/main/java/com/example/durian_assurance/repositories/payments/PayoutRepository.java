@@ -1,6 +1,7 @@
 package com.example.durian_assurance.repositories.payments;
 
 import com.example.durian_assurance.models.payments.Payout;
+import com.example.durian_assurance.services.payments.PayoutService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
