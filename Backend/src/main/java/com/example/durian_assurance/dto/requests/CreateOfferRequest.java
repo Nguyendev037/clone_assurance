@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Getter
@@ -22,6 +23,8 @@ public class CreateOfferRequest {
     private String description;
 
     private int years;
+
+    private List<CreateCasesInOffersRequest> cases;
 
     @Min(value=0, message="Price must be greater than or equal 0")
     @Max(value=100000000, message="Price must be less than or equal to 100,000,000")

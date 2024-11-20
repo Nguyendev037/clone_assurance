@@ -11,5 +11,5 @@ import org.springframework.stereotype.Service;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CasesInOffersServices {
     CasesInOffersRepository casesInOffersRepository;
-    CaseService caseService;
+
 }

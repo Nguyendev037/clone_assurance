@@ -25,7 +25,7 @@ public class PayoutResponse{
                 .signedOfferId(payout.getSignedOffer().getId())
                 .payoutDate(payout.getPayoutDate())
                 .amount(payout.getAmount())
-                .caseId(payout.getCaseId().getId())
+                .caseId(payout.getCasePayout().getId())
                 .receiverId(payout.getReceiver().getId())
                 .build();
     }
