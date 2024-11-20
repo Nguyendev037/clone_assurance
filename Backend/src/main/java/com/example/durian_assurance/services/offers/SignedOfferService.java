@@ -9,15 +9,19 @@ import com.example.durian_assurance.services.users.ClientService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.Setter;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SignedOfferService {
+
     SignedOfferRepository signedOfferRepository;
     OfferService offerService;
     ClientService clientService;
@@ -36,8 +40,12 @@ public class SignedOfferService {
                 .build();
         return signedOfferRepository.save(signedOffer);
     }
+    public List<SignedOffer> getAllSignedOffer () {
+        return signedOfferRepository.findAll();
+    }
 
     public SignedOffer getById(String id){
         return signedOfferRepository.findById(id).orElseThrow(()->new NotFoundException("Can not find signed offer with id: " + id));
     }
+
 }
