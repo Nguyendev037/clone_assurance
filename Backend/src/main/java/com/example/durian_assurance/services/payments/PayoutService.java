@@ -4,10 +4,10 @@ import com.example.durian_assurance.dto.requests.PayoutRequest;
 import com.example.durian_assurance.dto.responses.PayoutResponse;
 import com.example.durian_assurance.models.offers.CasesInOffers;
 import com.example.durian_assurance.models.offers.SignedOffer;
+import com.example.durian_assurance.models.payments.Claim;
 import com.example.durian_assurance.models.payments.Payout;
 import com.example.durian_assurance.repositories.offers.CasesInOffersRepository;
 import com.example.durian_assurance.repositories.payments.PayoutRepository;
-import com.example.durian_assurance.services.offers.CaseService;
 import com.example.durian_assurance.services.offers.SignedOfferService;
 import com.example.durian_assurance.services.users.UserService;
 import lombok.AccessLevel;
@@ -16,10 +16,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -29,6 +27,7 @@ public class PayoutService {
     SignedOfferService signedOfferService;
     CasesInOffersRepository casesInOffersRepository;
     UserService userService;
+    ClaimService claimService;
 
     public void makePayout(PayoutRequest request) {
         SignedOffer signedOffer = signedOfferService.getById(request.getSignedOfferId());
@@ -42,12 +41,15 @@ public class PayoutService {
         if (!caseExistsInOffer) {
             throw new RuntimeException("This case do not belong in this offer");
         }
+        Claim claim = claimService.acceptedClaim(request.getClaimId());
+
         Payout payout = Payout.builder()
                 .payoutDate(LocalDate.now())
                 .amount(request.getAmount())
                 .receiver(userService.findById(request.getReceiverId()))
                 .signedOffer(signedOffer)
                 .casePayout(casePayout)
+                .claim(claim)
                 .build();
         payoutRepository.save(payout);
     }

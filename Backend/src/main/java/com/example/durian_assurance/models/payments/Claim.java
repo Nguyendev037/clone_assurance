@@ -48,6 +48,8 @@ public class Claim implements Serializable {
     @Enumerated(EnumType.STRING)
     Status status;
 
+    String reason;
+
     @OneToOne
     @JoinColumn(name = "payout_id", referencedColumnName = "id")
     Payout payout;
