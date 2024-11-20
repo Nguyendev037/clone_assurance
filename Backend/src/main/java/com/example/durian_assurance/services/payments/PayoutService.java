@@ -42,7 +42,6 @@ public class PayoutService {
         if (!caseExistsInOffer) {
             throw new RuntimeException("This case do not belong in this offer");
         }
-
         Payout payout = Payout.builder()
                 .payoutDate(LocalDate.now())
                 .amount(request.getAmount())
