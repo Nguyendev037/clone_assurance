@@ -1,7 +1,7 @@
 package com.example.durian_assurance.models.payments;
 
 import com.example.durian_assurance.models.BaseEntity;
-import com.example.durian_assurance.models.offers.Case;
+import com.example.durian_assurance.models.offers.CasesInOffers;
 import com.example.durian_assurance.models.offers.SignedOffer;
 import com.example.durian_assurance.models.users.User;
 import jakarta.persistence.*;
@@ -39,9 +39,9 @@ public class Payout extends BaseEntity {
     @Column(nullable = false)
     BigDecimal amount;
 
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "case_id")
-    Case caseId;
+    CasesInOffers casePayout;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "receiver_id")
