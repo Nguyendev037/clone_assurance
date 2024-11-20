@@ -7,7 +7,6 @@ import com.example.durian_assurance.models.users.Client;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -39,9 +38,6 @@ public class SignedOffer extends BaseEntity {
 
     @Column(name = "end_date")
     private LocalDate endDate;
-
-    @Column(name = "payment_amount")
-    private BigDecimal paymentAmount;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "signedOffer")
     private Set<Payment> payments;
