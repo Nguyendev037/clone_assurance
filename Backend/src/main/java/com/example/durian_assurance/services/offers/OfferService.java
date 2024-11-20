@@ -1,4 +1,4 @@
-package com.example.durian_assurance.services.offers;
+package com.example.Durian_Assurance.services.offers;
 
 import com.example.durian_assurance.dto.requests.CreateOfferRequest;
 import com.example.durian_assurance.exceptions.NotFoundException;
@@ -45,7 +45,6 @@ public class OfferService implements IOfferService {
     public Offer updateOffer(Long id, CreateOfferRequest offerDTO) {
         Offer existingOffer = getOfferById(id);
         existingOffer.setName(offerDTO.getName());
-
         return null;
     }
 

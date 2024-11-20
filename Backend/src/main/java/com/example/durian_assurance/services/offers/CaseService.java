@@ -1,4 +1,4 @@
-package com.example.durian_assurance.services.offers;
+package com.example.Durian_Assurance.services.offers;
 
 import com.example.durian_assurance.repositories.offers.CaseRepository;
 import lombok.AccessLevel;
