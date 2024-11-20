@@ -1,4 +1,4 @@
-package com.example.Durian_Assurance.services.offers;
+package com.example.durian_assurance.services.offers;
 
 import com.example.durian_assurance.dto.requests.CreateOfferRequest;
 import com.example.durian_assurance.exceptions.NotFoundException;
