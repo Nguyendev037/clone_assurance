@@ -28,7 +28,8 @@ public class Claim implements Serializable {
     @JoinColumn(name = "client_id")
     Client client;
 
-    @Column(name = "signed_offer_id")
+    @ManyToOne
+    @JoinColumn(name = "signed_offer_id")
     SignedOffer signedOffer;
 
     String description;
