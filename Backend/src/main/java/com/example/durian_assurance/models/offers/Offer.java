@@ -2,6 +2,7 @@ package com.example.durian_assurance.models.offers;
 
 
 import com.example.durian_assurance.models.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,5 +30,6 @@ public class Offer extends BaseEntity {
     private BigDecimal payoutAmount;
 
     @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<CasesInOffers> cases;
 }
