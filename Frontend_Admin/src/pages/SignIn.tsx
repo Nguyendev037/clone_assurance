@@ -26,9 +26,15 @@ function SignIn() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      const response = await Base_Axios.post("/user/create", form);
-      if (response.status === 201) {
-        setState("Sign in successfully");
+      const response1 = await Base_Axios.post("/user/create", form);
+      if (response1.status === 201) {
+        const response2 = await Base_Axios.post(
+          "/client?userId=" + response1.data.id
+        );
+        if (response2.status === 201) {
+          setState("Sign in successfully");
+          sessionStorage.setItem("user", JSON.stringify(response1.data));
+        }
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -37,7 +43,7 @@ function SignIn() {
         setState("An unexpected error occurred");
       }
     }
-    setOpen(true)
+    setOpen(true);
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -67,7 +73,7 @@ function SignIn() {
             onChange={handleChange}
             required
           />
-          
+
           <label htmlFor="bankAccount">
             <b>Bank Account</b>
           </label>
@@ -119,7 +125,7 @@ function SignIn() {
           <button type="submit">Sign In</button>
         </div>
       </form>
-      <Snackbar open={open} setOpen={setOpen} text={state}/>
+      <Snackbar open={open} setOpen={setOpen} text={state} />
     </>
   );
 }
