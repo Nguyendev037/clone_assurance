@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import SignIn from "./pages/SignIn";
 import Navbar from "./components/Navbar";
+import Claims from "./pages/Claims";
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
     component: SignIn,
     title : "Sign in"
   },
+  {
+    path: "/claim",
+    component: Claims,
+    title : "Claims"
+  }
 ];
 
 function App() {
