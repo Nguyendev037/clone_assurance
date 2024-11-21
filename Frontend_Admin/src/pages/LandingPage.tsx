@@ -1,8 +1,10 @@
 ﻿import React from 'react'
-
+import Table from "../components/Table.tsx"
 export default function LandingPage() {
     return (
-        <div>LandingPage</div>
+        <>
+            <Table model={"user"}/>
+        </>
     )
 }
 
