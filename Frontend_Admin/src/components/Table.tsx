@@ -1,25 +1,24 @@
 ﻿import React, {useEffect, useState} from 'react'
 import {Base_Axios} from "../axios.ts";
 interface PropPass {
-    model: String;
+    model: string;
 }
 
 export default function Table({model}: PropPass) {
 
-    const [data, Setdata] = useState<any[]>([]);
+    const [data, setData] = useState<object[]>([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await Base_Axios.get(`/${model}`);
                 console.log("API Response:", response.data); // Check what is being returned
-                Setdata(response.data);
+                setData(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
         fetchData();
     }, [model]);
-
 
     let headers = data.length > 0 ? Object.keys(data[0]) : [];
     headers = [...headers, "actions"];
