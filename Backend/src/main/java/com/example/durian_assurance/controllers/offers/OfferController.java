@@ -2,12 +2,14 @@ package com.example.durian_assurance.controllers.offers;
 
 
 import com.example.durian_assurance.dto.requests.CreateOfferRequest;
+import com.example.durian_assurance.dto.responses.OfferResponse;
 import com.example.durian_assurance.iservices.IOfferService;
 import com.example.durian_assurance.models.offers.Offer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
@@ -16,8 +18,10 @@ public class OfferController {
     private final IOfferService offerService;
 
     @GetMapping
-    public List<Offer> getAllOffer(){
-        return offerService.getAllOffer();
+    public List<OfferResponse> getAllOffer(){
+        return offerService.getAllOffer().stream()
+                .map(OfferResponse::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @PostMapping

@@ -1,5 +1,7 @@
 package com.example.durian_assurance.models.offers;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +23,7 @@ public class CasesInOffers {
 
     @ManyToOne
     @JoinColumn(name = "case_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private Case caseType;
 
     private String detail;
