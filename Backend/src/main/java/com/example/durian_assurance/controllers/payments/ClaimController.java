@@ -1,7 +1,7 @@
 package com.example.durian_assurance.controllers.payments;
 
 import com.example.durian_assurance.dto.requests.ClaimRequest;
-import com.example.durian_assurance.dto.responses.PayoutResponse;
+import com.example.durian_assurance.dto.responses.ClaimResponse;
 import com.example.durian_assurance.services.payments.ClaimService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,13 @@ public class ClaimController {
     @ResponseStatus(HttpStatus.CREATED)
     public String createClaim(@RequestBody ClaimRequest request){
         claimService.createClaim(request);
-        return "Successful payout";
+        return "File claim sucessfully";
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<ClaimResponse> getClaims(){
+        return claimService.getClaims().stream().map(ClaimResponse::toResponse).toList();
     }
 
     @PostMapping("/decline")

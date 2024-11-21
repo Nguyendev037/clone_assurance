@@ -15,6 +15,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -44,6 +45,10 @@ public class ClaimService {
 
     public Claim getById(Long id){
         return claimRepository.findById(id).orElseThrow(()->new NotFoundException("Can not find claim with id: "+ id));
+    }
+
+    public List<Claim> getClaims(){
+        return claimRepository.findAll();
     }
 
     public Claim acceptedClaim(Long id){
