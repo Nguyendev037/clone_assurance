@@ -48,6 +48,9 @@ public class ClaimService {
 
     public Claim acceptedClaim(Long id){
         Claim claim = getById(id);
+        if (claim.getStatus() == Status.ACCEPTED){
+            throw new RuntimeException("Already accepted this claim");
+        }
         claim.setStatus(Status.ACCEPTED);
         return claimRepository.save(claim);
     }
