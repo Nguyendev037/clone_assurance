@@ -13,7 +13,7 @@ function Snackbar({
     setTimeout(() => {
       setOpen(false);
     }, 3000);
-  }, [open]);
+  }, [open, setOpen]);
 
   return (
     <div id="snackbar" className={open ? "show" : ""}>

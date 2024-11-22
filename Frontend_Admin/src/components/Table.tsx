@@ -57,7 +57,6 @@ export default function Table({ buttons, data, model }: PropPass) {
           <tbody className="divide-y divide-gray-200">
             {data.map((item, index) => (
               <tr key={index} className="mt-3">
-
                 <td>
                   <div className="ml-5">
                     <div className="bg-gray-200 rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
@@ -73,11 +72,11 @@ export default function Table({ buttons, data, model }: PropPass) {
                           width="20"
                           height="20"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="currentColor"
                           fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z"></path>
                           <path d="M5 12l5 5l10 -10"></path>
@@ -86,7 +85,6 @@ export default function Table({ buttons, data, model }: PropPass) {
                     </div>
                   </div>
                 </td>
-
                 {headers.map((key) => (
                   <td key={key}>{String(item[key])}</td>
                 ))}
