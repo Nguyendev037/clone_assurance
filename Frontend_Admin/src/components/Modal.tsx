@@ -3,7 +3,7 @@ import React from "react";
 function Modal({
   open,
   setOpen,
-  content,
+  content, 
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
