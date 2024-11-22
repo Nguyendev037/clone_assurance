@@ -39,7 +39,7 @@ function Claims() {
     fetchData();
   }, []);
 
-  function acceptClaim(id: number) {
+  function acceptClaim(id: number ) {
     setForm(<ClaimForm data={data[id]} setOpen={setOpen}/>);
     setOpen(true);
   }
