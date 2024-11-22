@@ -2,6 +2,10 @@
 import Table from "../components/Table.tsx";
 import { Base_Axios } from "../axios.ts";
 
+type OfferType = {
+    id : number
+}
+
 export default function LandingPage() {
     const [data, setData] = useState([]); // Use camelCase for setter function
 
@@ -15,7 +19,8 @@ export default function LandingPage() {
     // Signed Function
     const signedFunction = async (offerId: number) => {
         try {
-            const user = JSON.parse(sessionStorage.getItem("user") || "{}");
+            const offer : OfferType = data[offerId];
+            const user = JSON.parse(localStorage.getItem("user") || "{}");
             const userId  = user?.id ;
             console.log(userId);
             const startDate = new Date().toISOString(); 
@@ -25,7 +30,7 @@ export default function LandingPage() {
             
             const signedParam = {
                 clientId,
-                offerId,
+                offerId : offer.id,
                 startDate,
             };
             // Make the POST request
