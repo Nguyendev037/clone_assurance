@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Table from "../components/Table.tsx";
 import { Base_Axios } from "../axios.ts";
 import Modal from "../components/Modal";
