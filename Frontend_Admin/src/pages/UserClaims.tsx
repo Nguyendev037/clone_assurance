@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
 import Table from "../components/Table.tsx";
-import {Base_Axios} from "../axios.ts";
+import { Base_Axios } from "../axios.ts";
+import Modal from "../components/Modal";
+import CreateClaimForm, { SignOffer } from "../components/CreateClaimForm";
 
 function UserClaims() {
-  const [data, setData] = useState([]); // Use camelCase for setter function
-  const model = "claim";
+  const [data, setData] = useState<SignOffer[]>([]);
+  const [offer,setOffer] = useState<SignOffer>();
+  const model = "sign";
   // Fetch Data
   useEffect(() => {
     const fetchData = async () => {
@@ -18,19 +21,30 @@ function UserClaims() {
     };
     fetchData();
   }, [model]);
+
+
+  const [open, setOpen] = useState<boolean>(false);
+
+  function createClaim(id: number) {
+    setOffer(data[id])
+    setOpen(true);
+  }
+
   return (
     <div>
       <>
-        <Table
-            model={model}
-            data={data}
-            buttons={[
-          
-            ]}
+        <Table model={model} data={data} buttons={[{
+            actionName : 'File claim', action : createClaim 
+        }]} />
+        <Modal
+          buttonText="accept claim"
+          open={open}
+          setOpen={setOpen}
+          content={<CreateClaimForm data={offer}/>}
         />
       </>
     </div>
-  )
+  );
 }
 
-export default UserClaims
+export default UserClaims;
