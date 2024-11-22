@@ -35,6 +35,9 @@ public class ClientService{
         return clientRepository.findById(clientId).orElseThrow(()->new NotFoundException("Can not found client with id: " + clientId));
     }
 
+    public Long getClientIDByUserId(Long userId) {
+        return clientRepository.getClientIdByUserID(userId);
+    }
     public List<UserResponse> getAllClients() {
         List<Client> clients = clientRepository.findAll();
         return clients.stream()

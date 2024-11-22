@@ -17,7 +17,7 @@ import java.util.List;
 public class SignedOfferController {
     private final SignedOfferService signedOfferService;
 
-    @GetMapping("/")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<SignedOfferResponse> getAllSignedOffer () {
         return signedOfferService.getAllSignedOffer().stream().map(SignedOfferResponse::toResponse).toList();
@@ -29,11 +29,9 @@ public class SignedOfferController {
         return SignedOfferResponse.toResponse(signedOfferService.getById(id));
     }
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public SignedOfferResponse createSignedOffer(@RequestBody SignedOfferRequest signedOfferDTO) {
         return SignedOfferResponse.toResponse(signedOfferService.createSignedOffer(signedOfferDTO));
     }
-
-
 }
