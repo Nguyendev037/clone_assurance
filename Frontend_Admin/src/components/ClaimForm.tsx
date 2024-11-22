@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Base_Axios } from "../axios";
-import { ClaimDataType } from "../pages/Claims";
+import { ClaimDataType } from "../pages/AdminClaims";
 
 type FormState = {
   amount: number;
