@@ -32,7 +32,7 @@ public class PayoutService {
     public void makePayout(PayoutRequest request) {
         SignedOffer signedOffer = signedOfferService.getById(request.getSignedOfferId());
 
-        CasesInOffers casePayout = casesInOffersRepository.findById(request.getCasePayoutId())
+        CasesInOffers casePayout = casesInOffersRepository.findByCaseTypeId(request.getCasePayoutId())
                 .orElseThrow(() -> new RuntimeException("Can not find this case in offer"));
 
         boolean caseExistsInOffer = signedOffer.getOffer().getCases().stream()

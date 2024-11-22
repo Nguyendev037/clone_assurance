@@ -1,10 +1,8 @@
 package com.example.durian_assurance.dto.responses;
 
-import com.example.durian_assurance.models.offers.Case;
+import com.example.durian_assurance.models.offers.CasesInOffers;
 import com.example.durian_assurance.models.offers.Offer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,11 +13,21 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CasesInOfferResonse {
+public class CasesInOfferResponse {
     private Long id;
-    private Offer offer;
-    @JsonBackReference
-    private Case caseType;
+
+    private Long offerId;
+
+    private CaseResponse caseType;
 
     private String detail;
+
+    public static CasesInOfferResponse toResponse(CasesInOffers cases) {
+        return CasesInOfferResponse.builder()
+                .offerId(cases.getOffer().getId())
+                .detail(cases.getDetail())
+                .caseType(CaseResponse.toResponse(cases.getCaseType()))
+                .id(cases.getId())
+                .build();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.durian_assurance.dto.responses;
 
 import com.example.durian_assurance.models.offers.CasesInOffers;
 import com.example.durian_assurance.models.offers.Offer;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -15,13 +16,13 @@ import java.util.stream.Collectors;
 @Getter
 
 public class OfferResponse {
-
     Long id;
     String name;
     String description;
     int years;
     BigDecimal payoutAmount;
-    Set<String> caseNames;
+    @JsonManagedReference
+    Set<CasesInOfferResponse> cases;
 
     public static OfferResponse mapToDTO(Offer offer) {
         return OfferResponse.builder()
@@ -29,10 +30,7 @@ public class OfferResponse {
                 .name(offer.getName())
                 .years(offer.getYears())
                 .payoutAmount(offer.getPayoutAmount())
-                .caseNames(
-                        offer.getCases().stream().map(c -> c.getCaseType().getName()).collect(Collectors.toSet())
-                )
+                .cases(offer.getCases().stream().map(CasesInOfferResponse::toResponse).collect(Collectors.toSet()))
                 .build();
     }
-
 }
