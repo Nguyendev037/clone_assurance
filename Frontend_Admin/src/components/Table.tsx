@@ -95,7 +95,7 @@ export default function Table({buttons, data, model}: PropPass) {
                                     return (
                                         <button key={id}
                                                 className="mr-3"
-                                                onClick={() => button.action(item["id"] as number | string)}
+                                                onClick={() => button.action(index)}
                                         >
                                             {button.actionName}
                                         </button>

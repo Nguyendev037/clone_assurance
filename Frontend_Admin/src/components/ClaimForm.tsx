@@ -1,43 +1,79 @@
 import { useEffect, useState } from "react";
 import { Base_Axios } from "../axios";
-import { AxiosError } from "axios";
+import { ClaimDataType } from "../pages/Claims";
 
 type FormState = {
-    amount: number;
-    signed_offer_id: string;
-    case_payout_id: number;
-    receiver_id: number;
-    claim_id: number;
-  };
-  
-  type UserState = {
+  amount: number;
+  signed_offer_id: string;
+  case_payout_id: number;
+  receiver_id: number;
+  claim_id: number;
+};
+
+type Case = {
+  description: string;
+  id: number;
+  name: string;
+};
+
+type CaseInOffer = {
+  id: number;
+  name: number;
+  description: string;
+  caseType: Case;
+};
+
+type Offer = {
+  id: string;
+  clientId: number;
+  offer: {
+    cases: CaseInOffer[];
+    description: string | null;
     id: number;
     name: string;
-    bankAccount: string;
-    address: string;
-    phone: string;
-    email: string;
+    payoutAmount: number;
+    years: number;
   };
+  isActive: boolean;
+  startDate: Date;
+  endDate: Date;
+  paymentAmount: number;
+};
 
-function ClaimForm() {
+function ClaimForm({
+  setOpen,
+  data,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  data: ClaimDataType;
+}) {
   const [form, setForm] = useState<FormState>({
     amount: 0,
-    signed_offer_id: "",
+    signed_offer_id: data.signed_offer_id,
     case_payout_id: 0,
-    receiver_id: 0,
-    claim_id: 0,
+    receiver_id: data.client_id,
+    claim_id: data.id,
   });
 
+  const [offer, setOffer] = useState<Offer>();
   useEffect(() => {
-    const user = sessionStorage.getItem("user");
-    if (user) {
-      const parsedUser: UserState = JSON.parse(user);
-      setForm((prevForm) => ({
-        ...prevForm,
-        receiver_id: parsedUser.id,
-      }));
-    }
-  }, []);
+    const fetchOffer = async () => {
+      try {
+        const response = await Base_Axios.get(`/sign/${data.signed_offer_id}`);
+        if (response.status === 200) {
+          const temp: Offer = response.data;
+          setOffer(temp);
+          setForm((prevForm) => ({
+            ...prevForm,
+            case_payout_id: temp?.offer.cases[0]?.id ?? 0,
+          }));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchOffer();
+  }, [data.signed_offer_id]);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -55,12 +91,9 @@ function ClaimForm() {
         console.log(response.data);
       }
     } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(`Error signing in: ${error.message || "Unknown error"}`);
-      } else {
-        console.log("An unexpected error occurred");
-      }
+      console.log(error);
     }
+    setOpen(false);
   }
 
   return (
@@ -70,7 +103,7 @@ function ClaimForm() {
       onSubmit={handleSubmit}
     >
       <div className="container">
-        <div></div>
+        <h1 className="mb-10 text-lg text-center">Accept Claim Form</h1>
         <label htmlFor="amount">
           <b>Amount</b>
         </label>
@@ -87,41 +120,49 @@ function ClaimForm() {
           <b>Signed Offer ID</b>
         </label>
         <input
-          type="number"
-          name="amount"
+          type="text"
+          name="signed_offer_id"
           value={form.signed_offer_id}
-          onChange={handleChange}
           readOnly
         />
 
         <label htmlFor="case_payout_id">
-          <b>Case Payout ID</b>
+          <b>Case</b>
         </label>
-        <input
-          type="number"
-          name="amount"
+        <select
+          name="case_payout_id"
           value={form.case_payout_id}
-          onChange={handleChange}
-          readOnly
-        />
-
-        <label htmlFor="claim_id">
-          <b>Claim ID</b>
-        </label>
-        <input
-          type="number"
-          name="amount"
-          value={form.claim_id}
-          onChange={handleChange}
-          readOnly
-        />
-
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onChange={(e) => {
+            setForm((prevForm) => ({
+              ...prevForm,
+              case_payout_id: parseInt(e.target.value),
+            }));
+          }}
+          style={{
+            width: "100%",
+          }}
         >
-          Submit Claim
-        </button>
+          {offer?.offer?.cases.map((item, index) => {
+            return (
+              <option
+                value={item.id}
+                key={index}
+                selected={item.id == form.case_payout_id}
+              >
+                {item.caseType.name}
+              </option>
+            );
+          })}
+        </select>
+
+        <div className="flex justify-center mt-4">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-24"
+          >
+            Submit Claim
+          </button>
+        </div>
       </div>
     </form>
   );
