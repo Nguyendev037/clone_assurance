@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Base_Axios } from "../axios";
 
-export type ClaimType = {
+type ClaimType = {
   description: string;
   hospital: string;
   admissionDate: string;
@@ -12,11 +12,11 @@ export type ClaimType = {
   signed_offer_id: string;
 };
 
-type SignOffer = {
-    id : string
-}
+export type SignOffer = {
+  id: string;
+};
 
-function CreateClaimForm({data} : {data : SignOffer}) {
+function CreateClaimForm({ data }: { data?: SignOffer | undefined }) {
   const [form, setForm] = useState<ClaimType>({
     description: "",
     hospital: "",
@@ -25,8 +25,12 @@ function CreateClaimForm({data} : {data : SignOffer}) {
     diagnosis: "",
     payoutAmount: 0,
     client_id: 0,
-    signed_offer_id: data.id,
+    signed_offer_id: data?.id || "",
   });
+
+  useEffect(() => {
+    setForm((prev) => ({ ...prev, signed_offer_id: data?.id || "" }));
+  }, [data]);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -54,7 +58,11 @@ function CreateClaimForm({data} : {data : SignOffer}) {
   }
 
   return (
-    <form id="claim-form" className="modal-content animate" onSubmit={handleSubmit}>
+    <form
+      id="claim-form"
+      className="modal-content animate"
+      onSubmit={handleSubmit}
+    >
       <div className="container">
         <h1 className="mb-10 text-lg text-center">File Claim</h1>
 

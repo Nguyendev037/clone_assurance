@@ -21,10 +21,8 @@
   border-radius: 20px;
 }
 
-#sign-in input[type="text"],
-#sign-in input[type="email"],
-#claim-form input[type="text"],
-#claim-form input[type="number"],
+#sign-in input,
+#claim-form input,
 #claim-form select {
   width: 100%;
   padding: 12px 20px;
