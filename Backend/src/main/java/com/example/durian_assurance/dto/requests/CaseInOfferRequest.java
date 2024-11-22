@@ -1,4 +1,4 @@
-package com.example.durian_assurance.dto.responses;
+package com.example.durian_assurance.dto.requests;
 
 import lombok.*;
 
@@ -11,5 +11,4 @@ public class CaseInOfferRequest {
     String detail;
     Long caseTypeId;
     String caseTypeName;
-
 }
