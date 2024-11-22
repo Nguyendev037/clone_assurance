@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Base_Axios } from "../axios";
-import { ClaimDataType } from "../pages/Claims";
+import { ClaimDataType } from "../pages/AdminClaims";
 import Snackbar from "./Snackbar";
 
 function DenyClaimForm({

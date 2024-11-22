@@ -21,7 +21,7 @@ public class OfferController {
     public List<OfferResponse> getAllOffer(){
         return offerService.getAllOffer().stream()
                 .map(OfferResponse::mapToDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @PostMapping
@@ -35,7 +35,7 @@ public class OfferController {
     }
 
     @GetMapping("/{id}")
-    public Offer getOfferById(@PathVariable(value = "id") Long id){
-        return offerService.getOfferById(id);
+    public OfferResponse getOfferById(@PathVariable(value = "id") Long id){
+        return OfferResponse.mapToDTO(offerService.getOfferById(id));
     }
 }

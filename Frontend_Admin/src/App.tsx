@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import SignIn from "./pages/SignIn";
 import Navbar from "./components/Navbar";
-import Claims from "./pages/Claims";
+import Claims from "./pages/AdminClaims";
+import UserClaims from "./pages/UserClaims";
 
 const routes = [
   {
@@ -18,8 +19,13 @@ const routes = [
   },
   {
     path: "/claim",
+    component: UserClaims,
+    title : "User Claim"
+  },
+  {
+    path: "/admin_claim",
     component: Claims,
-    title : "Claims"
+    title : "Admin Claim"
   }
 ];
 

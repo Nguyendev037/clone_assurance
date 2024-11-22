@@ -21,7 +21,7 @@ export type ClaimDataType = {
   payoutId: string
 }
 
-function Claims() {
+function AddClaims() {
   const [data, Setdata] = useState([]);
   const [form, setForm] = useState<React.JSX.Element | null>(null);
   const [open, setOpen] = useState<boolean>(false);
@@ -39,7 +39,7 @@ function Claims() {
     fetchData();
   }, []);
 
-  function acceptClaim(id: number) {
+  function acceptClaim(id: number ) {
     setForm(<ClaimForm data={data[id]} setOpen={setOpen}/>);
     setOpen(true);
   }
@@ -63,4 +63,4 @@ function Claims() {
   );
 }
 
-export default Claims;
+export default AddClaims;
