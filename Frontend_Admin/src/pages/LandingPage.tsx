@@ -1,6 +1,7 @@
-﻿import React, { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import Table from "../components/Table.tsx";
 import { Base_Axios } from "../axios.ts";
+import Snackbar from "../components/Snackbar.tsx";
 
 type OfferType = {
     id : number
@@ -8,7 +9,9 @@ type OfferType = {
 
 export default function LandingPage() {
     const [data, setData] = useState([]); // Use camelCase for setter function
-
+    
+    const [open, setOpen] = useState(false);
+    const [openError, setOpenError] = useState<boolean>(false);
     const model = "products";
 
     // Edit Function
@@ -36,9 +39,10 @@ export default function LandingPage() {
             // Make the POST request
             const response = await Base_Axios.post("/sign", signedParam);
             console.log("Signed Offer Response:", response.data);
-
+            setOpen(true);
             return response.data; // Return response if needed
         } catch (error) {
+            setOpenError(true);
             console.error("Error posting data:", error);
         }
     };
@@ -73,6 +77,8 @@ export default function LandingPage() {
                     },
                 ]}
             />
+            <Snackbar text="Congratulations! for your payment" open={open} setOpen={setOpen} />
+            <Snackbar text="Payment is Errored" open={openError} setOpen={setOpenError} />
         </>
     );
 }

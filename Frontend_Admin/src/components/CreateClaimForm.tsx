@@ -16,7 +16,7 @@ export type SignOffer = {
   id: string;
 };
 
-function CreateClaimForm({ data }: { data?: SignOffer | undefined }) {
+function CreateClaimForm({ data, setSuccess}: { data?: SignOffer | undefined ,   setSuccess:  React.Dispatch<React.SetStateAction<boolean>>}) {
   const [form, setForm] = useState<ClaimType>({
     description: "",
     hospital: "",
@@ -34,7 +34,19 @@ function CreateClaimForm({ data }: { data?: SignOffer | undefined }) {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
-    setForm((prev) => ({ ...prev, client_id: user?.id || 0 }));
+    if (user?.id) {
+      Base_Axios.get(`/client/${user.id}`)
+          .then((clientResponse) => {
+            const clientId = clientResponse.data;
+            setForm((prev) => ({
+              ...prev,
+              client_id: clientId || 0,
+            }));
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+    }
   }, []);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -50,6 +62,7 @@ function CreateClaimForm({ data }: { data?: SignOffer | undefined }) {
     try {
       const response = await Base_Axios.post("/claim", form);
       if (response.status === 201) {
+        setSuccess(true)
         console.log(response.data);
       }
     } catch (error) {
