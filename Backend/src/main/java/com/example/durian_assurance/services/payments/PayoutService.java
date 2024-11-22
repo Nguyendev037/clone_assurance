@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +42,7 @@ public class PayoutService {
         if (!caseExistsInOffer) {
             throw new RuntimeException("This case do not belong in this offer");
         }
-        Claim claim = claimService.acceptedClaim(request.getClaimId());
+        Claim claim = claimService.acceptedClaim(request.getClaimId(), request.getAmount());
 
         Payout payout = Payout.builder()
                 .payoutDate(LocalDate.now())

@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -51,12 +52,13 @@ public class ClaimService {
         return claimRepository.findAll();
     }
 
-    public Claim acceptedClaim(Long id){
+    public Claim acceptedClaim(Long id, BigDecimal amount){
         Claim claim = getById(id);
         if (claim.getStatus() == Status.ACCEPTED){
             throw new RuntimeException("Already accepted this claim");
         }
         claim.setStatus(Status.ACCEPTED);
+        claim.setPayoutAmount(amount);
         return claimRepository.save(claim);
     }
 

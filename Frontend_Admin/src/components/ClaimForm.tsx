@@ -79,7 +79,7 @@ function ClaimForm({
     const { name, value } = event.target;
     setForm((prevForm) => ({
       ...prevForm,
-      [name]: name === "amount" ? parseFloat(value) : value,
+      [name]: value,
     }));
   }
 
@@ -87,9 +87,7 @@ function ClaimForm({
     event.preventDefault();
     try {
       const response = await Base_Axios.post("/payout", form);
-      if (response.status === 201) {
-        console.log(response.data);
-      }
+      console.log(response);
     } catch (error) {
       console.log(error);
     }

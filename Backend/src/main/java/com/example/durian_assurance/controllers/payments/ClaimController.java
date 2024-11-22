@@ -29,7 +29,7 @@ public class ClaimController {
     }
 
     @PostMapping("/decline")
-    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ResponseStatus(HttpStatus.OK)
     public String getClaimByID(@RequestParam(value = "claim_id") Long id, @RequestParam(value = "reason") String reason){
         claimService.declineClaim(id, reason);
         return "Claim declined";
