@@ -33,7 +33,7 @@ function SignIn() {
         );
         if (response2.status === 201) {
           setState("Sign in successfully");
-          sessionStorage.setItem("user", JSON.stringify(response1.data));
+          localStorage.setItem("user", JSON.stringify(response1.data));
         }
       }
     } catch (error) {
