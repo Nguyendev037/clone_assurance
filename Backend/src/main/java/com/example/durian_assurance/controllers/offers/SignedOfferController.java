@@ -17,7 +17,7 @@ import java.util.List;
 public class SignedOfferController {
     private final SignedOfferService signedOfferService;
 
-    @GetMapping("/")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<SignedOffer> getAllSignedOffer () {
         return signedOfferService.getAllSignedOffer();
@@ -29,11 +29,9 @@ public class SignedOfferController {
         return signedOfferService.getById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public SignedOffer createSignedOffer(@RequestBody SignedOfferRequest signedOfferDTO) {
         return signedOfferService.createSignedOffer(signedOfferDTO);
     }
-
-
 }
